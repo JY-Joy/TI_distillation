@@ -1,0 +1,19 @@
+accelerate launch --num_processes=1 --gpu_ids 1 src/textual_inversion.py \
+  --pretrained_model_name_or_path /share/huangrenyuan/model_zoo/diffusion/stable-diffusion-2-1-base \
+  --train_data_dir data/ip/elon_musk \
+  --resolution=512 \
+  --learning_rate=5.0e-04 \
+  --seed=3467 \
+  --scale_lr \
+  --lr_scheduler="constant" \
+  --lr_warmup_steps=0 \
+  --learnable_property="object" \
+  --placeholder_token="<man>" \
+  --initializer_token="man" \
+  --train_batch_size 4 \
+  --gradient_accumulation_steps 1 \
+  --max_train_steps 2000 \
+  --output_dir="invert_tokens/elon_musl_sd2_1_med_distilled2K" \
+  --unet_path="/share/huangrenyuan/model_zoo/diffusion/bk-sdm-v2-med"
+  --num_vectors 2 \
+  --push_to_hub
